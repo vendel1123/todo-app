@@ -1,0 +1,283 @@
+/* alap beállítások */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background: linear-gradient(100deg, #E3F2FD, #F3E5F5);
+}
+
+/* középre igazított app */
+.app-root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 1rem;
+}
+
+/* kártya */
+.todo-card {
+  /* border: 1px solid black; */
+  width: 100%;
+  max-width: 900px;
+  background: #F3EDEDCC;
+  padding: 2.5rem;
+  box-shadow: 30px 20px 30px #0f172a26;
+  border-radius: 1.25rem;
+}
+
+/* fejléc */
+header h1 {
+  text-align: center;
+  font-size: 2.3rem;
+  font-weight: 700;
+}
+
+header p {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #6B7280;
+}
+
+/* input sor */
+.input-row {
+  /* border: 1px solid black; */
+  display: flex;
+  /* flex-direction: row; */ /* ez a default beállítás flexnél */
+  gap: 1.75rem;
+  margin: 1.25rem;
+}
+
+.input-row input {
+  flex: 1; /* az input mező a lehető legnagyobb helyet foglalja el */
+  padding: 1rem;
+  border-radius: 1.75rem;
+  border: 1px solid #D1D5DB;
+  font-size: 1.2rem;
+  outline: none;
+  transition: border-color 1s, box-shadow 1s; /* ha animálva lesz (pl focus-ba kerül) az input mező, akkor a border-color és a box-shadow 1 másodperc alatt megy végbe az animálás = fluid lesz az animáció*/
+}
+
+.input-row input:focus {
+  border-color: #3B82F6;
+  box-shadow: 0 0 0 3px #3b82f640;
+}
+
+.input-row button {
+  padding: 0 1.25rem;
+  border-radius: 0.75rem;
+  border: none;
+  background: #3B82F6;
+  color: #FFF;
+  font-weight: 600;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow :0 8px 16px #3b82f680;
+  white-space: nowrap; /* nem engedi megtörni a szöveget a gombban */
+  transition: transform 0.1s, box-shadow 0.1s, background 0.1s;
+}
+
+.input-row button:hover {
+  background: #2563EB;
+  transform: translateY(-1px);
+}
+
+.input-row button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px #3B82F666;
+}
+
+/* ha üres a todo listánk */
+.empty-state {
+  text-align: center;
+  color: #6B7280;
+  font-size: 1.1rem;
+  margin: 0.75rem 0 0;
+}
+
+/* ----- toolbar (szűrők + törlés) ----- */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1rem;
+}
+
+.filter {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.filter button {
+  padding: 0.5rem 1.75rem;
+  border-radius: 999px;
+  background: #E5E7EB;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border: none;
+  transition: background 1s;
+}
+
+.filter button:hover {
+  background: #D1D5DB;
+  transform: translateY(-1px);
+}
+
+.filter button:active {
+  transform: translateY(0px);
+  box-shadow: 0 4px 10px #B6CFF666;
+}
+
+.filter button.black {
+  background-color: #111827;
+  color: #F9FAFB;
+}
+
+button.clear-btn {
+  background: #FEE2E2;
+  color: #B91C1C;
+  border: none;
+  padding: 0.5rem 1.75rem;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+button.clear-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/*  :not(:disabled) -> csak akkor alkalmazza a hover stílust, ha a gomb nem disabled */
+button.clear-btn:not(:disabled):hover {
+  background: #FECACA;
+  transform: translateY(-1px);
+}
+/*  :not(:disabled) -> csak akkor alkalmazza az active stílust, ha a gomb nem disabled */
+button.clear-btn:not(:disabled):active {
+  transform: translateY(0);
+}
+
+/* lista */
+.todo-list {
+  list-style: none;
+  max-height: 480px;
+  /* border: 1px solid black; */
+  overflow-y: auto;
+}
+
+/* chrome, opera, edge */
+.todo-list::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.todo-list::-webkit-scrollbar-thumb {
+  background: #CBD5F5;
+  border-radius: 999px;
+}
+
+/* firefox */
+.todo-list {
+  scrollbar-width: thin;
+  scrollbar-color: #555 #E0E0E0;
+}
+
+/* todo elemek */
+.todo-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem;
+  margin: 0.5rem 0;
+  background: #F9FAFB;
+  font-size: 1.2rem;
+  border-radius: 0.75rem;
+  transition: background 0.1s, transform 0.1s, box-shadow 0.1s;
+}
+
+.todo-list li:hover {
+  background: #F3F4F6;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px #0F172A14;
+}
+
+.todo-list label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.todo-list label input[type='checkbox'] {
+  min-height: 20px;
+  max-height: 20px;
+  min-width: 20px;
+  max-width: 20px;
+  accent-color: #3B82F6;
+}
+
+.todo-list label .todo-text {
+  font-size: 1.2rem;
+  word-break: break-word;
+}
+
+/* ha van kész todo, akkor húzzuk át a szöveget */
+.todo-list li.completed .todo-text {
+  text-decoration: line-through;
+  color: #9CA3AF;
+}
+
+/* törlő gomb */
+.delete-btn {
+  padding: 0.5rem 0.75rem;
+  border-radius: 999px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #9CA3AF;
+  background: transparent;
+  border: none;
+  transition: background 1s, color 1s;
+}
+
+.delete-btn:hover {
+  background: #FEE2E2;
+  color: #B91C1C;
+}
+
+/* footer */
+footer {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 1.2rem;
+  color: #6B7280;
+}
+
+/* mobil nézett */
+
+@media (max-width:600px) {
+  .input-row{
+    gap: 0.5rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .input-row button{
+    height: 50px;
+    width: 100%;
+  }
+  .toolbar{
+    justify-content: center;
+    margin-bottom: 1rem ;
+  }
+
+}
+
